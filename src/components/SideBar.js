@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
 import { FiPlus, FiLogOut, FiTrash } from "react-icons/fi";
 import { logout } from "@/store/slices/authSlice";
+import { setShowSidebar } from "@/store/slices/uiSlice"; 
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const [debouncedSearch, setDebouncedSearch] = useState("");
 const debounceTimer = useRef(null);
   const [renameState, setRenameState] = useState({});
   const [isMounted, setIsMounted] = useState(false);
+  const { isMobile } = useSelector((state) => state.ui); 
 
   const filteredChatrooms = chatrooms.filter((c) =>
   (c.title || "New Chat").toLowerCase().includes(debouncedSearch.toLowerCase())
@@ -44,6 +46,9 @@ const debounceTimer = useRef(null);
 
   const handleSelect = (id) => {
     dispatch(selectChatroom(id));
+    if (isMobile) {
+    dispatch(setShowSidebar(false)); 
+  }
   };
 
   const startRenaming = (id, currentTitle, e) => {

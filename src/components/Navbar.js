@@ -1,10 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FiSun, FiMoon } from "react-icons/fi";
+import { FiSun, FiMoon, FiArrowLeft } from "react-icons/fi";
+import { useSelector, useDispatch } from "react-redux";
+import { setShowSidebar } from "@/store/slices/uiSlice";
 
 export default function Navbar() {
   const [isDark, setIsDark] = useState(false);
+
+  const dispatch = useDispatch();
+  const { isMobile, showSidebar } = useSelector((state) => state.ui);
+
+  const toggleSidebarBack = () => dispatch(setShowSidebar(true));
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -40,9 +47,17 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between px-6 py-3 bg-[var(--background)] text-[var(--foreground)] shadow-md">
-      <div className="text-xl font-semibold bg-[var(--background)] text-[var(--foreground)]">
+      <div className="flex items-center gap-3">
+        {isMobile && !showSidebar && (
+          <button onClick={toggleSidebarBack}>
+            <FiArrowLeft size={24} />
+          </button>
+        )}
+        <div className="text-xl font-semibold bg-[var(--background)] text-[var(--foreground)]">
         Kuvaka x Gemini
       </div>
+      </div>
+      
 
       <button
         onClick={toggleDarkMode}
