@@ -29,7 +29,6 @@ export default function OTPVerificationPage() {
     mode: "onChange",
   });
 
-  // Load OTP info from localStorage
   useEffect(() => {
     const storedPhone = localStorage.getItem("otpPhone");
     const storedMode = localStorage.getItem("authMode");
@@ -42,7 +41,13 @@ export default function OTPVerificationPage() {
 
     setPhone(storedPhone);
     setMode(storedMode);
-    setTimeout(() => setFocus("otp0"), 100);
+
+    setTimeout(() => {
+  if (inputRefs.current[0]) {
+    inputRefs.current[0].focus();
+  }
+}, 100);
+
   }, [router, setFocus]);
 
   useEffect(() => {

@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Overview
 
-## Getting Started
+### This project is a full-featured conversational AI interface inspired by modern chat apps like Google gemini and ChatGPT. It features secure OTP-based authentication, a responsive UI optimized for both desktop and mobile, and persistent chatroom/message storage using Redux and localStorage. The app offers an intuitive UX for creating, renaming, and deleting chatrooms, chatting with an AI assistant, uploading images,
 
-First, run the development server:
+### [Live Link](https://kuvaka-assessment.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🔐 OTP Authentication
+- Phone number-based login/signup with OTP flow
+- Auto-focused OTP inputs for seamless typing
+- Session persistence using `localStorage`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 💬 Chatroom Management
+- Create, delete, rename, and search chatrooms
+- Select chatrooms to resume past conversations
+- Supports optimistic UI updates and state persistence
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🤖 Conversational Interface
+- Chat with an AI assistant (mocked or API-connected)
+- Send messages with text or image support
+- Loading indicators and typing feedback
 
-## Learn More
+### 📱 Mobile-Friendly UX
+- Fully responsive layout
+- Sidebar collapses automatically on mobile after chatroom selection
+- Smooth transitions between chatroom and message views
 
-To learn more about Next.js, take a look at the following resources:
+### 🧠 Smart UI Enhancements
+- Typing indicator while user types
+- Copy-to-clipboard icon visible on message hover
+- Image upload with previews and fallback on storage limits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧱 Tech Stack
 
-## Deploy on Vercel
+| Category      | Tools/Tech                              |
+|---------------|------------------------------------------|
+| Frontend      | **Next.js 15 App Router**, React, Tailwind CSS |
+| State Mgmt    | **Redux Toolkit**, localStorage persistence |
+| Forms & Validation | React Hook Form, Zod                  |
+| API Fetching  | Tanstack Query  |
+| Notifications | React Toastify                          |
+| Other         | UUID/Nanoid, Debounce, |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### How throttling in implmented?
+#### This is not strict throttling, but it's doing a delayed response simulation — which mimics throttling for AI responses.
+#### I added a small delay before the AI ("Gemini") sends a response. This delay simulates typing and gives the impression that the AI is thinking before replying. It's done using a setTimeout with a delay of about 1.5 seconds plus a bit of randomness, Also, I made sure that the AI only replies once per message by using a flag called isResponding. This helps prevent multiple AI replies if the user sends messages quickly one after another. While this isn’t a traditional throttling function, it kind of acts like one by temporarily blocking further AI replies until the current one is done.
+
+### How Form validation is implemented?
+#### Form validation in this project is handled using React Hook Form along with Zod for schema-based validation. On the phone input form, I used a Zod schema to ensure that the user selects a country code and enters a valid phone number between 8 to 15 digits. This helps prevent invalid numbers from being submitted. The schema is connected to the form using the zodResolver, which is used to show specific error messages under each field if the input doesn't meet the required conditions. For the OTP verification screen, I used basic validations inside the form logic to ensure all four digits are entered before allowing the user to continue.
+
+### How pagination and infinite scroll is implemented?
+#### This uses client-side pagination with infinite scroll for loading chat messages. Instead of rendering all messages at once, which could affect performance for long conversations, only a fixed number (20 messages per page) are shown initially using a MESSAGES_PER_PAGE constant. These messages are sliced from the complete message list and updated dynamically as the user scrolls.The main scroll container (chatRef) listens for scroll events. When the user scrolls to the top of the chat, the app checks if more messages can be loaded. If yes, it increments the currentPage state after a short delay to simulate loading. This triggers a re-render with more messages loaded above.
+
+### How debounce is implemented?
+#### The search feature in the sidebar uses a debounce technique. Instead of immediately filtering chatrooms on every single key press (which can cause too many re-renders), the app waits until the user pauses typing for 500 milliseconds before applying the filter.This is done by keeping track of a timer using a useRef hook called debounceTimer. Whenever the search input changes, any existing timer is cleared and a new one is started. Only when this timer finishes without interruption (i.e., the user stops typing), the search query is updated in state (debouncedSearch). The chatrooms list is then filtered based on this debounced search term.
+
+---
+## 📸 Screenshots
+
+### 🔐 Login Page
+![Login Screen](./kuvakaLogin.png)
+
+### 🔑 OTP Verification
+![OTP Screen](./kuvakaOtpVerification.png)
+
+### 🧠 Dashboard - Full View
+![Dashboard 1](./kuvakaDashboard1.png)
+
+### 💬 Dashboard - Chat View
+![Dashboard 2](./kuvakaDashboard2.png)
+
+
+## Folder struccture
+
+
+├── app
+│   ├── dashboard
+│   │   └── page.js
+│   ├── globals.css
+│   ├── layout.js
+│   ├── login
+│   │   └── page.js
+│   ├── otp-verification
+│   │   └── page.js
+│   ├── page.js // unused 
+│   └── signup
+│       └── page.js
+├── components
+│   ├── ChatInput.js
+│   ├── ChatInterface.js
+│   ├── ImagePreview.js
+│   ├── MessageBubble.js
+│   ├── Navbar.js
+│   ├── OtpForm.js
+│   ├── ProtectedRoute.js
+│   └── SideBar.js
+├── services
+│   └── api.js
+└── store
+    ├── index.js
+    ├── slices
+    │   ├── authSlice.js
+    │   ├── chatSlice.js
+    │   ├── messagesSlice.js
+    │   └── uiSlice.js
+    └── utils
+        └── user.js
+
