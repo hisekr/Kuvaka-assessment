@@ -4,6 +4,15 @@
 
 ### [Live Link](https://kuvaka-assessment.vercel.app/)
 
+### Setup and run instructions
+
+#### Clone the repository
+#### git clone https://github.com/hisekr/Kuvaka-assessment.git
+#### cd Kuvaka-assessment
+#### install dependencies -> Run " npm install" -> " npm run dev "
+#### The app will be running locally at: http://localhost:3000
+
+
 ## Features
 
 ### 🔐 OTP Authentication
@@ -111,3 +120,4 @@ src/
     └── utils/
         └── user.js
 ```
+
