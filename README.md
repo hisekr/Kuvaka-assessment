@@ -19,6 +19,7 @@
 - Phone number-based login/signup with OTP flow
 - Auto-focused OTP inputs for seamless typing
 - Session persistence using `localStorage`
+- Protected routes for login, otp-verification, dashboard i.e if a user not logged in tries to go to /dashboard it will be redirected to /login and also if a loggedin user tries to go to /login or /signup it will be redirected to /dashboard.
 
 ### 💬 Chatroom Management
 - Create, delete, rename, and search chatrooms
