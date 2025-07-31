@@ -62,49 +62,52 @@
 ## 📸 Screenshots
 
 ### 🔐 Login Page
-![Login Screen](/kuvakaLogin.png)
+![Login Screen](/assets/kuvakaLogin.png)
 
 ### 🔑 OTP Verification
-![OTP Screen](/kuvakaOtpVerification.png)
+![OTP Screen](/assets/kuvakaOtpVerification.png)
 
 ### 🧠 Dashboard - Full View
-![Dashboard 1](/kuvakaDashboard1.png)
+![Dashboard 1](/assets/kuvakaDashboard1.png)
 
 ### 💬 Dashboard - Chat View
-![Dashboard 2](/kuvakaDashboard2.png)
+![Dashboard 2](/assets/kuvakaDashboard2.png)
 
 
 ## Folder struccture (src)
 
-├── app
-│ ├── dashboard
-│ │ └── page.js
-│ ├── globals.css
-│ ├── layout.js
-│ ├── login
-│ │ └── page.js
-│ ├── otp-verification
-│ │ └── page.js
-│ ├── page.js // unused
-│ └── signup
-│ └── page.js
-├── components
-│ ├── ChatInput.js
-│ ├── ChatInterface.js
-│ ├── ImagePreview.js
-│ ├── MessageBubble.js
-│ ├── Navbar.js
-│ ├── OtpForm.js
-│ ├── ProtectedRoute.js
-│ └── SideBar.js
-├── services
-│ └── api.js
-└── store
-├── index.js
-├── slices
-│ ├── authSlice.js
-│ ├── chatSlice.js
-│ ├── messagesSlice.js
-│ └── uiSlice.js
-└── utils
-└── user.js
+```plaintext
+src/
+├── app/
+│   ├── dashboard/
+│   │   └── page.js
+│   ├── globals.css
+│   ├── layout.js
+│   ├── login/
+│   │   └── page.js
+│   ├── otp-verification/
+│   │   └── page.js
+│   ├── page.js  # unused
+│   └── signup/
+│       └── page.js
+├── components/
+│   ├── ChatInput.js
+│   ├── ChatInterface.js
+│   ├── ImagePreview.js
+│   ├── MessageBubble.js
+│   ├── Navbar.js
+│   ├── OtpForm.js
+│   ├── ProtectedRoute.js
+│   └── SideBar.js
+├── services/
+│   └── api.js
+└── store/
+    ├── index.js
+    ├── slices/
+    │   ├── authSlice.js
+    │   ├── chatSlice.js
+    │   ├── messagesSlice.js
+    │   └── uiSlice.js
+    └── utils/
+        └── user.js
+```
