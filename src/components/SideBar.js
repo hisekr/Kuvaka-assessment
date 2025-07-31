@@ -29,6 +29,9 @@ const debounceTimer = useRef(null);
 
   const handleNewChat = () => {
     dispatch(selectChatroom(null));
+    if (isMobile) {
+    dispatch(setShowSidebar(false)); 
+  }
   };
 
   const handleDelete = (id, e) => {
