@@ -17,7 +17,7 @@
 - Supports optimistic UI updates and state persistence
 
 ### 🤖 Conversational Interface
-- Chat with an AI assistant (mocked or API-connected)
+- Chat with an AI assistant (mocked)
 - Send messages with text or image support
 - Loading indicators and typing feedback
 
@@ -29,7 +29,7 @@
 ### 🧠 Smart UI Enhancements
 - Typing indicator while user types
 - Copy-to-clipboard icon visible on message hover
-- Image upload with previews and fallback on storage limits
+- Image upload with previews and restricts on storage limits
 
 ---
 
