@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }) {
 
     if (!isLoggedIn && (pathname.startsWith("/dashboard") || pathname.startsWith("/otp-verification"))) {
       router.replace("/login");
-    } else if (isLoggedIn && (pathname === "/" || pathname === "/login")) {
+    } else if (isLoggedIn && (pathname === "/" || pathname === "/login" || pathname === "/signup")) {
       router.replace("/dashboard");
     }
   }, [isAuthenticated, user, pathname, router]);
